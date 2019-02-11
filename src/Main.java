@@ -2,18 +2,47 @@ import java.util.*;
 
 public class Main {
 
-//    public static int[] mergeArrays(int[] a, int[] b) {
-//        int[] result = new int[a.length + b.length];
-//    }
+    public static int[] mergeArrays(int[] a1, int[] a2) {
+        int[] a3 = new int[a1.length + a2.length];
+        //outer:
+        int i=0, j=0;
+        for (int k=0; k<a3.length; k++) {
 
-    public static void showInvariations (int[] a) {
-        Deque<int[]> q = new ArrayDeque<>();
-        for (int i = 0; i < a.length; i++) {
-            q.addLast(new int[]{a[i]});
+            if (i > a1.length-1) {
+                int a = a2[j];
+                a3[k] = a;
+                j++;
+            }
+            else if (j > a2.length-1) {
+                int a = a1[i];
+                a3[k] = a;
+                i++;
+            }
+            else if (a1[i] < a2[j]) {
+                int a = a1[i];
+                a3[k] = a;
+                i++;
+            }
+            else {
+                int b = a2[j];
+                a3[k] = b;
+                j++;
+            }
         }
-        q.forEach(x-> {
-            System.out.println(Arrays.toString(x));
-        });
+
+        return a3;
+    }
+
+
+    public static void showInvariations (int[] ab) {
+        Deque<int[]> q = new ArrayDeque<>();
+        for (int i = 0; i < ab.length; i++) {
+            q.addLast(new int[]{ab[i]});
+        }
+        while (q.size()>1) {
+            q.addLast(mergeArrays(q.pollFirst(),q.pollFirst()));
+        }
+        q.forEach(x-> System.out.println(Arrays.toString(x)));
     }
         public static void main (String[]args){
             Scanner scanner = new Scanner(System.in);
