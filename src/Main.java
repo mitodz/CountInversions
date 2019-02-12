@@ -33,12 +33,18 @@ public class Main {
 
     public static void showInvariations (int[] a) {
         Deque<Integer> q = new ArrayDeque<>();
+        int count = 0; //количество инверсий
         for (int i = 0; i < a.length; i++) {
             q.addLast(a[i]);
         }
         while (q.size() > 1) {
+                int b = q.pollFirst(); //первый в очереди, который будем сравнивать с остальными
 
+            for (Integer i : q) {
+                if (b==i) count++;
+            }
         }
+        System.out.println(count);
     }
 
     public static Deque<int[]> sortedQueueFromArray (int[] ab) {
@@ -59,7 +65,6 @@ public class Main {
         if (n == 1) {
             System.out.println(0);
         } else {
-            int count = 0; //количество инверсий
             int[] a = new int[n];
             for (int i = 0; i < n; i++) {
                 a[i] = scanner.nextInt();
