@@ -31,7 +31,17 @@ public class Main {
     }
 
 
-    public static void showInvariations(int[] ab) {
+    public static void showInvariations (int[] a) {
+        Deque<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < a.length; i++) {
+            q.addLast(a[i]);
+        }
+        while (q.size() > 1) {
+
+        }
+    }
+
+    public static Deque<int[]> sortedQueueFromArray (int[] ab) {
         Deque<int[]> q = new ArrayDeque<>();
         for (int i = 0; i < ab.length; i++) {
             q.addLast(new int[]{ab[i]});
@@ -39,7 +49,7 @@ public class Main {
         while (q.size() > 1) {
             q.addLast(mergeArrays(q.pollFirst(), q.pollFirst()));
         }
-        q.forEach(x -> System.out.println(Arrays.toString(x)));
+        return q;
     }
 
     public static void main(String[] args) {
