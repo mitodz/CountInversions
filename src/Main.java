@@ -32,22 +32,17 @@ public class Main {
 
 
     public static void showInvariations (int[] a) {
-        Deque<Integer> q = new ArrayDeque<>();
+        // РЕАЛИЗОВАТЬ ПОРЦИОННУЮ СОРТИРОВКУ И ПОДСЧЁТ COUNT
         int count = 0; //количество инверсий
-        for (int i = 0; i < a.length; i++) {
-            q.addLast(a[i]);
-        }
-        while (q.size() > 1) {
-                int b = q.pollFirst(); //первый в очереди, который будем сравнивать с остальными
-
-            for (Integer i : q) {
-                if (b==i) count++;
-            }
+        Deque<Integer> q = new ArrayDeque<>();
+        int[] aSorted = sortedQueueFromArray(a);
+        for (int i : aSorted) {
+            q.addLast(i);
         }
         System.out.println(count);
     }
 
-    public static Deque<int[]> sortedQueueFromArray (int[] ab) {
+    public static int[] sortedQueueFromArray (int[] ab) {
         Deque<int[]> q = new ArrayDeque<>();
         for (int i = 0; i < ab.length; i++) {
             q.addLast(new int[]{ab[i]});
@@ -55,7 +50,7 @@ public class Main {
         while (q.size() > 1) {
             q.addLast(mergeArrays(q.pollFirst(), q.pollFirst()));
         }
-        return q;
+        return q.poll();
     }
 
     public static void main(String[] args) {
