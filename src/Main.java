@@ -8,24 +8,25 @@ public class Main {
         //outer:
         int i = 0, j = 0;
         for (int k = 0; k < a3.length; k++) {
-            if (j > a2.length - 1) {
-                int a = a1[i];
-                a3[k] = a;
-                if (a1[i] > a2[a2.length-1] && k!=a3.length-1) count++;
-                j++;
-            } else if (i > a1.length - 1) {
+            if (i > a1.length - 1) {
                 int b = a2[j];
                 a3[k] = b;
-                if (a1[a1.length-1] > a2[j] && k!=a3.length-1) count++;
+                if (a1.length > 1 && a1[a1.length - 1] > a2[j]) count++;
                 j++;
+            } else if (j > a2.length - 1) {
+                int a = a1[i];
+                a3[k] = a;
+                if (a2.length > 1 && a1[i] > a2[a2.length - 1]) count++;
+                i++;
             } else if (a1[i] <= a2[j]) {
                 int a = a1[i];
                 a3[k] = a;
                 i++;
+
             } else {
                 int b = a2[j];
                 a3[k] = b;
-                i++;
+                j++;
                 count++;
             }
         }
@@ -39,8 +40,8 @@ public class Main {
         for (int i = index; i < ab.length; i++) {
             q.addLast(new int[]{ab[i]});
         }
-        for (int i = 0; i < Math.pow(2,n) - ab.length; i++) {
-            q.addLast(new int[] {m});
+        for (int i = 0; i < Math.pow(2, n) - ab.length; i++) {
+            q.addLast(new int[]{m});
         }
         while (q.size() > 1) {
             q.addLast(mergeArrays(q.pollFirst(), q.pollFirst()));
@@ -58,7 +59,7 @@ public class Main {
             for (int i = 0; i < n; i++) {
                 a[i] = scanner.nextInt();
             }
-            int[] result = sortedArray(a,0);
+            int[] result = sortedArray(a, 0);
             System.out.println(count);
 //            System.out.println(count);
         }
