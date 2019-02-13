@@ -1,13 +1,13 @@
 import java.util.*;
 
 public class Main {
+    static int count = 0;
 
     public static int[] mergeArrays(int[] a1, int[] a2) {
         int[] a3 = new int[a1.length + a2.length];
         //outer:
         int i = 0, j = 0;
         for (int k = 0; k < a3.length; k++) {
-
             if (i > a1.length - 1) {
                 int a = a2[j];
                 a3[k] = a;
@@ -15,6 +15,7 @@ public class Main {
             } else if (j > a2.length - 1) {
                 int a = a1[i];
                 a3[k] = a;
+//                if (a1[i] > a2[a2.length-1]) count++;
                 i++;
             } else if (a1[i] < a2[j]) {
                 int a = a1[i];
@@ -24,32 +25,21 @@ public class Main {
                 int b = a2[j];
                 a3[k] = b;
                 j++;
+                count++;
             }
         }
-
         return a3;
     }
 
-
-    public static void showInvariations (int[] a) {
-        // РЕАЛИЗОВАТЬ ПОРЦИОННУЮ СОРТИРОВКУ И ПОДСЧЁТ COUNT
-        int count = 0; //количество инверсий
-        for (int i = 0; i < a.length - 1; i++) {
-            int[] aSorted = sortedQueueFromArray(a, i + 1);
-            for (int j : aSorted) {
-                if (a[i] > j) {
-                    count++;
-                } else break;
-            }
-        }
-
-        System.out.println(count);
-    }
-
-    public static int[] sortedQueueFromArray (int[] ab, int index) {
+    public static int[] sortedArray(int[] ab, int index) {
         Deque<int[]> q = new ArrayDeque<>();
+        int n = ab.length % 2 == 0 ? ab.length / 2 : ab.length / 2 + 1;
+        int m = 1000000000;
         for (int i = index; i < ab.length; i++) {
             q.addLast(new int[]{ab[i]});
+        }
+        for (int i = 0; i < n; i++) {
+            q.addLast(new int[] {m});
         }
         while (q.size() > 1) {
             q.addLast(mergeArrays(q.pollFirst(), q.pollFirst()));
@@ -60,7 +50,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt(); // число элементов входного массива
-
         if (n == 1) {
             System.out.println(0);
         } else {
@@ -68,7 +57,8 @@ public class Main {
             for (int i = 0; i < n; i++) {
                 a[i] = scanner.nextInt();
             }
-            showInvariations(a);
+            int[] result = sortedArray(a,0);
+            System.out.println(count);
 //            System.out.println(count);
         }
     }
