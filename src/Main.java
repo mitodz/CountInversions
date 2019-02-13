@@ -9,15 +9,16 @@ public class Main {
         int i = 0, j = 0;
         for (int k = 0; k < a3.length; k++) {
             if (i > a1.length - 1) {
-                int a = a2[j];
-                a3[k] = a;
+                int b = a2[j];
+                a3[k] = b;
+                if (a1[a1.length-1] > a2[j] && k != a3.length - 1) count++;
                 j++;
             } else if (j > a2.length - 1) {
                 int a = a1[i];
                 a3[k] = a;
-//                if (a1[i] > a2[a2.length-1]) count++;
+                if (a1[i] > a2[a2.length-1] && k != a3.length - 1) count++;
                 i++;
-            } else if (a1[i] < a2[j]) {
+            } else if (a1[i] <= a2[j]) {
                 int a = a1[i];
                 a3[k] = a;
                 i++;
@@ -33,7 +34,7 @@ public class Main {
 
     public static int[] sortedArray(int[] ab, int index) {
         Deque<int[]> q = new ArrayDeque<>();
-        int n = ab.length % 2 == 0 ? ab.length / 2 : ab.length / 2 + 1;
+        int n = ab.length % 2 == 0 ? 4 : 3;
         int m = 1000000000;
         for (int i = index; i < ab.length; i++) {
             q.addLast(new int[]{ab[i]});
