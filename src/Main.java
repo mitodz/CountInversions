@@ -34,17 +34,21 @@ public class Main {
     public static void showInvariations (int[] a) {
         // РЕАЛИЗОВАТЬ ПОРЦИОННУЮ СОРТИРОВКУ И ПОДСЧЁТ COUNT
         int count = 0; //количество инверсий
-        Deque<Integer> q = new ArrayDeque<>();
-        int[] aSorted = sortedQueueFromArray(a);
-        for (int i : aSorted) {
-            q.addLast(i);
+        for (int i = 0; i < a.length - 1; i++) {
+            int[] aSorted = sortedQueueFromArray(a, i + 1);
+            for (int j : aSorted) {
+                if (a[i] > j) {
+                    count++;
+                } else break;
+            }
         }
+
         System.out.println(count);
     }
 
-    public static int[] sortedQueueFromArray (int[] ab) {
+    public static int[] sortedQueueFromArray (int[] ab, int index) {
         Deque<int[]> q = new ArrayDeque<>();
-        for (int i = 0; i < ab.length; i++) {
+        for (int i = index; i < ab.length; i++) {
             q.addLast(new int[]{ab[i]});
         }
         while (q.size() > 1) {
