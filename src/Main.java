@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Main {
     static int count = 0;
+    static int m = 0;
 
     public static int[] mergeArrays(int[] a1, int[] a2) {
         int[] a3 = new int[a1.length + a2.length];
@@ -21,6 +22,7 @@ public class Main {
             } else if (a1[i] <= a2[j]) {
                 int a = a1[i];
                 a3[k] = a;
+                if (a1.length > 1 && a1[i] > a2[j-1]) count++;//подкорректировать
                 i++;
 
             } else {
