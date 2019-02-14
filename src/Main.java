@@ -15,15 +15,15 @@ public class Main {
                     a3[k] = b;
                 }
             } else if (j > a2.length - 1) {
-                for (;i < a1.length; i++, k++) {
+                count = count + (a1.length - (i + 1)) * count;
+                for (; i < a1.length; i++, k++) {
                     int a = a1[i];
                     a3[k] = a;
-                    if (a2.length > 1) count++;
                 }
             } else if (a1[i] <= a2[j]) {
                 int a = a1[i];
                 a3[k] = a;
-                if (i!=check && j>0 && a1[i] > a2[j - 1]) count++;
+                if (i != check && j > 0 && a1[i] > a2[j - 1]) count += j + 1;
                 i++;
             } else {
                 int b = a2[j];
@@ -62,9 +62,11 @@ public class Main {
             for (int i = 0; i < n; i++) {
                 a[i] = scanner.nextInt();
             }
+
             int[] result = sortedArray(a, 0);
             System.out.println(count);
-//            System.out.println(count);
         }
+        //System.out.println(Arrays.toString(mergeArrays(new int[] {5,6,7},new int[] {1,2,3,4})));
+        //System.out.println(count);
     }
 }
