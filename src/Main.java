@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Main {
     static int count = 0;
+    static int check = 0;
 
     public static int[] mergeArrays(int[] a1, int[] a2) {
         int[] a3 = new int[a1.length + a2.length];
@@ -9,25 +10,29 @@ public class Main {
         int i = 0, j = 0;
         for (int k = 0; k < a3.length; k++) {
             if (i > a1.length - 1) {
-                int b = a2[j];
-                a3[k] = b;
-                if (a1.length > 1 && a1[a1.length - 1] > a2[j]) count++;
-                j++;
+                for (int m = j; m < a2.length; m++) {
+                    int b = a2[j];
+                    a3[k] = b;
+                    j++;
+                }
             } else if (j > a2.length - 1) {
-                int a = a1[i];
-                a3[k] = a;
-                if (a2.length > 1 && a1[i] > a2[a2.length - 1]) count++;
-                i++;
+                for (int n = i; n < a1.length; n++) {
+                    int a = a1[i];
+                    a3[k] = a;
+                    if (a2.length > 1) count++;
+                    i++;
+                }
             } else if (a1[i] <= a2[j]) {
                 int a = a1[i];
                 a3[k] = a;
+                if (i!=check && j>0 && a1[i] > a2[j - 1]) count++;
                 i++;
-
             } else {
                 int b = a2[j];
                 a3[k] = b;
                 j++;
                 count++;
+                check = i;
             }
         }
         return a3;
