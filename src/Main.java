@@ -10,17 +10,15 @@ public class Main {
         int i = 0, j = 0;
         for (int k = 0; k < a3.length; k++) {
             if (i > a1.length - 1) {
-                for (int m = j; m < a2.length; m++) {
+                for (; j < a2.length; j++, k++) {
                     int b = a2[j];
                     a3[k] = b;
-                    j++;
                 }
             } else if (j > a2.length - 1) {
-                for (int n = i; n < a1.length; n++) {
+                for (;i < a1.length; i++, k++) {
                     int a = a1[i];
                     a3[k] = a;
                     if (a2.length > 1) count++;
-                    i++;
                 }
             } else if (a1[i] <= a2[j]) {
                 int a = a1[i];
