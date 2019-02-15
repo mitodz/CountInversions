@@ -2,71 +2,38 @@ import java.util.*;
 
 public class Main {
     static int count = 0;
-    //static int check = 0;
+    static int check = 0;
 
-    public static int[] mergeArrays(int[] first, int[] second) {
-//        int[] a3 = new int[a1.length + a2.length];
-//        //outer:
-//        int i = 0, j = 0;
-//        for (int k = 0; k < a3.length; k++) {
-//            if (i > a1.length - 1) {
-//                for (; j < a2.length; j++, k++) {
-//                    int b = a2[j];
-//                    a3[k] = b;
-//                }
-//            } else if (j > a2.length - 1) {
-//                count = count + (a1.length - (i + 1)) * count;
-//                for (; i < a1.length; i++, k++) {
-//                    int a = a1[i];
-//                    a3[k] = a;
-//                }
-//            } else if (a1[i] <= a2[j]) {
-//                int a = a1[i];
-//                a3[k] = a;
-//                if (i != check && j > 0 && a1[i] > a2[j - 1]) count += j + 1;
-//                i++;
-//            } else {
-//                int b = a2[j];
-//                a3[k] = b;
-//                j++;
-//                count++;
-//                check = i;
-//            }
-//        }
-//        return a3;
-
-        int[] result = new int[first.length + second.length];
-        int k = 0;
-        int b = 0;
-        for (int i = 0; i < first.length; i++) {
-            for (int j = b; j < second.length; j++) {
-                if (first[i] <= second[j]) {
-                    result[k++] = first[i];
-                    count = count + j;
-                    break;
-                } else {
-                    result[k++] = second[j];
-                    b++;
+    public static int[] mergeArrays(int[] a1, int[] a2) {
+        int[] a3 = new int[a1.length + a2.length];
+        //outer:
+        int i = 0, j = 0;
+        for (int k = 0; k < a3.length; k++) {
+            if (i > a1.length - 1) {
+                for (; j < a2.length; j++, k++) {
+                    int b = a2[j];
+                    a3[k] = b;
                 }
+            } else if (j > a2.length - 1) {
+                count = count + (a1.length - (i + 1)) * count;
+                for (; i < a1.length; i++, k++) {
+                    int a = a1[i];
+                    a3[k] = a;
+                }
+            } else if (a1[i] <= a2[j]) {
+                int a = a1[i];
+                a3[k] = a;
+                if (i != check && j > 0 && a1[i] > a2[j - 1]) count += j + 1;
+                i++;
+            } else {
+                int b = a2[j];
+                a3[k] = b;
+                j++;
+                count++;
+                check = i;
             }
         }
-        for (int p = 1; p < result.length; p++) {
-            if (result[p] == 0) {
-                if (result[p - 1] == second [second.length - 1]) {
-                    for (int z = first.length - (result.length - p); z < first.length; z++) {
-                        result[k++] = first[z];
-                        count = count + second.length;
-                    }
-                } else {
-                    for (int z = second.length - (result.length - p); z < second.length; z++) {
-                        result[k++] = second[z];
-                    }
-                }
-                break;
-            }
-        }
-
-        return result;
+        return a3;
  }
 
 
