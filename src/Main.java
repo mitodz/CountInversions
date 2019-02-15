@@ -15,7 +15,7 @@ public class Main {
                     a3[k] = b;
                 }
             } else if (j > a2.length - 1) {
-                count = count + (a1.length - (i + 1)) * count;
+                count = count + (a1.length - (i + 1)) * a2.length;
                 for (; i < a1.length; i++, k++) {
                     int a = a1[i];
                     a3[k] = a;
@@ -23,7 +23,7 @@ public class Main {
             } else if (a1[i] <= a2[j]) {
                 int a = a1[i];
                 a3[k] = a;
-                if (i != check && j > 0 && a1[i] > a2[j - 1]) count += j + 1;
+                if (i != check && j > 0 && a1[i] > a2[j - 1]) count += j;
                 i++;
             } else {
                 int b = a2[j];
@@ -67,7 +67,7 @@ public class Main {
             int[] result = sortedArray(a, 0);
             System.out.println(count);
         }
-        //System.out.println(Arrays.toString(mergeArrays(new int[] {5,6,7},new int[] {1,2,3,4})));
+        //System.out.println(Arrays.toString(mergeArrays(new int[] {2,3,9},new int[] {2,2,9})));
         //System.out.println(count);
     }
 }
