@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Main {
-    static int count = 0;
+    static long count = 0;
     static int check = 0;
 
     public static int[] mergeArrays(int[] a1, int[] a2) {
@@ -11,25 +11,21 @@ public class Main {
         for (int k = 0; k < a3.length; k++) {
             if (i > a1.length - 1) { //если закончился первый массив, заполняем элементами второго массива
                 for (; j < a2.length; j++, k++) {
-                    int b = a2[j];
-                    a3[k] = b;
+                    a3[k] = a2[j];
                 }
             } else if (j > a2.length - 1) { //если закончился второй массив, заполняем элементами первого массива и попутно умножаем счетчик на
                 //количество элементов второго массива и плюсуем к уже накопленному
                 count = count + (a1.length - (i + 1)) * a2.length;
                 for (; i < a1.length; i++, k++) {
-                    int a = a1[i];
-                    a3[k] = a;
+                    a3[k] = a1[i];
                 }
             } else if (a1[i] <= a2[j]) {
-                int a = a1[i];
-                a3[k] = a;
+                a3[k] = a1[i];
                 if (i != check && j > 0 && a1[i] > a2[j - 1]) count += j; //если элемент меньше второго, но при этом он больше, предыдущие второго массива
                 //и условие что этот элемент еще ни с чем не сравнивался
                 i++;
             } else {
-                int b = a2[j];
-                a3[k] = b;
+                a3[k] = a2[j];
                 j++;
                 count++;
                 check = i;//временный буфер для сравнения
@@ -39,20 +35,20 @@ public class Main {
  }
 
 
-    public static int[] sortedArray(int[] ab, int index) {
+    public static void sortedArray(int[] ab, int index) {
         Deque<int[]> q = new ArrayDeque<>();
-        long n = (long) Math.ceil(Math.sqrt(ab.length));
+        //long n = (long) Math.ceil(Math.sqrt(ab.length));
         int m = 1000000000;
         for (int i = index; i < ab.length; i++) {
             q.addLast(new int[]{ab[i]});
         }
-        for (int i = 0; i < Math.pow(2, n) - ab.length; i++) {
+        while(Integer.bitCount(q.size())!=1) {
             q.addLast(new int[]{m});
         }
         while (q.size() > 1) {
             q.addLast(mergeArrays(q.pollFirst(), q.pollFirst()));
         }
-        return q.poll();
+        System.out.println(count);
     }
 
     public static void main(String[] args) {
@@ -65,9 +61,8 @@ public class Main {
             for (int i = 0; i < n; i++) {
                 a[i] = scanner.nextInt();
             }
+            sortedArray(a, 0);
 
-            int[] result = sortedArray(a, 0);
-            System.out.println(count);
         }
         //System.out.println(Arrays.toString(mergeArrays(new int[] {2,3,9},new int[] {2,2,9})));
         //System.out.println(count);
