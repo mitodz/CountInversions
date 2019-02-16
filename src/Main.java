@@ -2,11 +2,9 @@ import java.util.*;
 
 public class Main {
     static long count = 0;
-    static int check = 0;
 
     public void run () {
-        Scanner scanner = new Scanner("7\n" +
-                "7 6 5 4 3 2 1");
+        Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt(); // число элементов входного массива
         if (n == 1) {
             System.out.println(0);
@@ -31,22 +29,18 @@ public class Main {
                 for (; j < x2; j++, k++) {
                     a3[k] = a2[j];
                 }
-            } else if (j > x2 - 1) { //если закончился второй массив, заполняем элементами первого массива и попутно умножаем счетчик на
-                //количество элементов второго массива и плюсуем к уже накопленному
-                count += (x1 - (i + 1)) * x2;
+            } else if (j > x2 - 1) { //если закончился второй массив, заполняем элементами первого массива
                 for (; i < x1; i++, k++) {
                     a3[k] = a1[i];
                 }
             } else if (a1[i] <= a2[j]) {
                 a3[k] = a1[i];
-                if (i != check && j > 0 && a1[i] > a2[j - 1]) count += j; //если элемент меньше второго, но при этом он больше, предыдущие второго массива
-                //и условие что этот элемент еще ни с чем не сравнивался
+
                 i++;
             } else {
                 a3[k] = a2[j];
                 j++;
-                count++;
-                check = i;//временный буфер для сравнения
+                count+=x1 - i;
             }
         }
         return a3;
@@ -70,9 +64,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
+        //long startTime = System.currentTimeMillis();
         new Main().run();
-        long finishTime = System.currentTimeMillis();
-        System.out.println(finishTime - startTime + " ms");
+        //long finishTime = System.currentTimeMillis();
+        //System.out.println(finishTime - startTime + " ms");
     }
 }
