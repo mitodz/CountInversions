@@ -4,6 +4,21 @@ public class Main {
     static long count = 0;
     static int check = 0;
 
+    public void run () {
+        Scanner scanner = new Scanner("7\n" +
+                "7 6 5 4 3 2 1");
+        int n = scanner.nextInt(); // число элементов входного массива
+        if (n == 1) {
+            System.out.println(0);
+        } else {
+            int[] a = new int[n];
+            for (int i = 0; i < n; i++) {
+                a[i] = scanner.nextInt();
+            }
+            sortedArray(a);
+        }
+    }
+
     public static int[] mergeArrays(int[] a1, int[] a2) {
         int x1 = a1.length;
         int x2 = a2.length;
@@ -38,11 +53,11 @@ public class Main {
  }
 
 
-    public static void sortedArray(int[] ab, int index) {
+    public static void sortedArray(int[] ab) {
         Deque<int[]> q = new ArrayDeque<>();
         //long n = (long) Math.ceil(Math.sqrt(ab.length));
-        int m = 1000000000;
-        for (int i = index; i < ab.length; i++) {
+        int m = 2147483647;
+        for (int i = 0; i < ab.length; i++) {
             q.addLast(new int[]{ab[i]});
         }
         while(Integer.bitCount(q.size())!=1) {
@@ -55,19 +70,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt(); // число элементов входного массива
-        if (n == 1) {
-            System.out.println(0);
-        } else {
-            int[] a = new int[n];
-            for (int i = 0; i < n; i++) {
-                a[i] = scanner.nextInt();
-            }
-            sortedArray(a, 0);
-
-        }
-        //System.out.println(Arrays.toString(mergeArrays(new int[] {2,3,9},new int[] {2,2,9})));
-        //System.out.println(count);
+        long startTime = System.currentTimeMillis();
+        new Main().run();
+        long finishTime = System.currentTimeMillis();
+        System.out.println(finishTime - startTime + " ms");
     }
 }
