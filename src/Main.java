@@ -5,18 +5,21 @@ public class Main {
     static int check = 0;
 
     public static int[] mergeArrays(int[] a1, int[] a2) {
-        int[] a3 = new int[a1.length + a2.length];
+        int x1 = a1.length;
+        int x2 = a2.length;
+        int[] a3 = new int[x1 + x2];
+        int x3 = a3.length;
         //outer:
         int i = 0, j = 0;
-        for (int k = 0; k < a3.length; k++) {
-            if (i > a1.length - 1) { //если закончился первый массив, заполняем элементами второго массива
-                for (; j < a2.length; j++, k++) {
+        for (int k = 0; k < x3; k++) {
+            if (i > x1 - 1) { //если закончился первый массив, заполняем элементами второго массива
+                for (; j < x2; j++, k++) {
                     a3[k] = a2[j];
                 }
-            } else if (j > a2.length - 1) { //если закончился второй массив, заполняем элементами первого массива и попутно умножаем счетчик на
+            } else if (j > x2 - 1) { //если закончился второй массив, заполняем элементами первого массива и попутно умножаем счетчик на
                 //количество элементов второго массива и плюсуем к уже накопленному
-                count = count + (a1.length - (i + 1)) * a2.length;
-                for (; i < a1.length; i++, k++) {
+                count += (x1 - (i + 1)) * x2;
+                for (; i < x1; i++, k++) {
                     a3[k] = a1[i];
                 }
             } else if (a1[i] <= a2[j]) {
