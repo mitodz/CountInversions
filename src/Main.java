@@ -9,12 +9,13 @@ public class Main {
         //outer:
         int i = 0, j = 0;
         for (int k = 0; k < a3.length; k++) {
-            if (i > a1.length - 1) {
+            if (i > a1.length - 1) { //если закончился первый массив, заполняем элементами второго массива
                 for (; j < a2.length; j++, k++) {
                     int b = a2[j];
                     a3[k] = b;
                 }
-            } else if (j > a2.length - 1) {
+            } else if (j > a2.length - 1) { //если закончился второй массив, заполняем элементами первого массива и попутно умножаем счетчик на
+                //количество элементов второго массива и плюсуем к уже накопленному
                 count = count + (a1.length - (i + 1)) * a2.length;
                 for (; i < a1.length; i++, k++) {
                     int a = a1[i];
@@ -23,14 +24,15 @@ public class Main {
             } else if (a1[i] <= a2[j]) {
                 int a = a1[i];
                 a3[k] = a;
-                if (i != check && j > 0 && a1[i] > a2[j - 1]) count += j;
+                if (i != check && j > 0 && a1[i] > a2[j - 1]) count += j; //если элемент меньше второго, но при этом он больше, предыдущие второго массива
+                //и условие что этот элемент еще ни с чем не сравнивался
                 i++;
             } else {
                 int b = a2[j];
                 a3[k] = b;
                 j++;
                 count++;
-                check = i;
+                check = i;//временный буфер для сравнения
             }
         }
         return a3;
